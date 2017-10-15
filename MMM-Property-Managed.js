@@ -40,7 +40,7 @@ Module.register("MMM-Property-Managed", {
 	getData: function() {
 		var self = this;
 
-		var urlApi = "http://localhost:3000/api/v1/buildings";
+		var urlApi = "http://localhost:3000/api/v1/buildings?email=stewart@theizone.co.uk";
 		var retry = true;
 
 		var dataRequest = new XMLHttpRequest();
