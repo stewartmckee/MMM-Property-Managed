@@ -1,0 +1,21 @@
+{
+  "name": "MMM-Property-Managed",
+  "version": "1.0.0",
+  "description": "Todo: Insert description here!",
+  "main": "MMM-Property-Managed.js",
+  "author": "Stewart McKee",
+  "license": "MIT",
+  "devDependencies": {
+    "grunt": "latest",
+    "grunt-eslint": "latest",
+    "grunt-jsonlint": "latest",
+    "grunt-markdownlint": "^1.0.13",
+    "grunt-stylelint": "latest",
+    "grunt-yamllint": "latest",
+    "stylelint-config-standard": "latest",
+    "time-grunt": "latest"
+  },
+  "dependencies": {
+    "handlebars": "latest"
+  }
+}

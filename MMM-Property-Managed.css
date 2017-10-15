@@ -1,0 +1,28 @@
+/*
+ *
+ * MMM-Property-Managed
+ *
+ * Stewart McKee
+ * MIT Licensed.
+ *
+ * Custom here your css module
+ *
+ */
+
+ #mmm-property-managed h4 {
+   margin: 0;
+   font-size: 0.5em;
+   line-height: 23px;
+ }
+
+ #mmm-property-managed header {
+   margin-top: 10px;
+ }
+
+ #mmm-property-managed .action-name {
+   text-align: left !important;
+ }
+
+#mmm-property-managed td.action-name {
+  padding-right: 10px;
+}
