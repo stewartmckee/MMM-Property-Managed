@@ -23,7 +23,6 @@ Module.register("MMM-Property-Managed", {
 
 		//Flag for check if module is loaded
 		this.loaded = false;
-
 		// Schedule update timer.
 		this.getData();
 		setInterval(function() {
@@ -40,7 +39,7 @@ Module.register("MMM-Property-Managed", {
 	getData: function() {
 		var self = this;
 
-		var urlApi = "http://localhost:3000/api/v1/buildings?email=stewart@theizone.co.uk";
+		var urlApi = "http://localhost:3000/api/v1/buildings?token="+this.data.config.token;
 		var retry = true;
 
 		var dataRequest = new XMLHttpRequest();
