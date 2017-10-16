@@ -145,8 +145,8 @@ Module.register("MMM-Property-Managed", {
 
     for(var i in this.dataNotification) {
       var buildingData = this.dataNotification[i];
-      delete buildingData.urgent_actions.invoies
-      delete buildingData.upcoming_actions.invoies
+      delete buildingData.urgent_actions.invoices
+      delete buildingData.upcoming_actions.invoices
       var data = {};
       data.name = buildingData.name;
       if (!this.emptyActions(buildingData.urgent_actions))
