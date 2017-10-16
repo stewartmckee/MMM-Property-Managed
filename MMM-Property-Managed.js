@@ -99,7 +99,7 @@ Module.register("MMM-Property-Managed", {
     if (actionsData.alarms) {
       for(var i in actionsData.alarms) {
         var alarm = actionsData.alarms[i];
-        actions.push({"name": alarm.location, "message": "Needs Replacing"});
+        actions.push({"name": alarm.location + "Alarm", "message": "Needs Replacing"});
       }
     }
 
@@ -138,6 +138,8 @@ Module.register("MMM-Property-Managed", {
 
     var buildings = [];
 
+    var noBuildingsWithActions = true;
+
     for(var i in this.dataNotification) {
       var buildingData = this.dataNotification[i];
       var data = {};
@@ -147,18 +149,20 @@ Module.register("MMM-Property-Managed", {
       if (!this.emptyActions(buildingData.upcoming_actions))
         data.upcomingActions = this.parseActions(buildingData.upcoming_actions);
 
-      if (data.urgentActions || data.upcomingActions)
+      if (data.urgentActions || data.upcomingActions) {
         data.hasActions = true;
-      else
+        noBuildingsWithActions = false;
+      } else {
         data.hasActions = false;
+      }
 
       buildings.push(data);
     }
 
+
     var context = {
-      title: "My First Blog Post!",
       buildings: buildings,
-      body: "My first post. Wheeeee!"
+      noBuildingsWithActions: noBuildingsWithActions
     };
 
     var template = Handlebars.templates.propertyManagedMain;
