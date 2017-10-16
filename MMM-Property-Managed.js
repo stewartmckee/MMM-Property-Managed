@@ -118,7 +118,7 @@ Module.register("MMM-Property-Managed", {
       if (actions[key] === undefined || actions[key] === null){
       }
       else {
-        if (typeof(actions[key]) == "boolean") {
+        if (key !== "invoices" && typeof(actions[key]) == "boolean") {
           if (actions[key]) {
             empty = false;
           }
@@ -145,8 +145,8 @@ Module.register("MMM-Property-Managed", {
 
     for(var i in this.dataNotification) {
       var buildingData = this.dataNotification[i];
-      // delete buildingData.urgent_actions.invoies
-      // delete buildingData.upcoming_actions.invoies
+      delete buildingData.urgent_actions.invoies
+      delete buildingData.upcoming_actions.invoies
       var data = {};
       data.name = buildingData.name;
       if (!this.emptyActions(buildingData.urgent_actions))
