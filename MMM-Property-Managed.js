@@ -39,7 +39,7 @@ Module.register("MMM-Property-Managed", {
 	getData: function() {
 		var self = this;
 
-		var urlApi = "http://localhost:3000/api/v1/buildings?token="+this.data.config.token;
+		var urlApi = "https://www.property-managed.com/api/v1/buildings?token="+this.data.config.token;
 		var retry = true;
 
 		var dataRequest = new XMLHttpRequest();
@@ -132,7 +132,7 @@ Module.register("MMM-Property-Managed", {
   },
 
   titleize: function(str) {
-    return str.substr(0, 1).toUpperCase() + str.substr(1, str.length)
+    return str.substr(0, 1).toUpperCase() + str.substr(1, str.length);
   },
   getDom: function() {
 
@@ -143,16 +143,16 @@ Module.register("MMM-Property-Managed", {
       var data = {};
       data.name = buildingData.name;
       if (!this.emptyActions(buildingData.urgent_actions))
-        data.urgentActions = this.parseActions(buildingData.urgent_actions)
+        data.urgentActions = this.parseActions(buildingData.urgent_actions);
       if (!this.emptyActions(buildingData.upcoming_actions))
-        data.upcomingActions = this.parseActions(buildingData.upcoming_actions)
+        data.upcomingActions = this.parseActions(buildingData.upcoming_actions);
 
       if (data.urgentActions || data.upcomingActions)
         data.hasActions = true;
       else
         data.hasActions = false;
 
-      buildings.push(data)
+      buildings.push(data);
     }
 
     var context = {
@@ -166,59 +166,6 @@ Module.register("MMM-Property-Managed", {
     var parser = new DOMParser();
     return parser.parseFromString(template(context), "text/html").getElementById("mmm-property-managed");
   },
-
-	getDom2: function() {
-		var self = this;
-
-		// create element wrapper for show into the module
-		var wrapper = document.createElement("div");
-		// If this.dataRequest is not empty
-		if (this.dataRequest) {
-			var wrapperDataRequest = document.createElement("div");
-			// check format https://jsonplaceholder.typicode.com/posts/1
-			wrapperDataRequest.innerHTML = this.dataRequest.title;
-
-			var labelDataRequest = document.createElement("label");
-			// Use translate function
-			//             this id defined in translations files
-			labelDataRequest.innerHTML = this.translate("TITLE");
-
-
-			wrapper.appendChild(labelDataRequest);
-			wrapper.appendChild(wrapperDataRequest);
-		}
-
-		// Data from helper
-		if (this.dataNotification) {
-			var wrapperDataNotification = document.createElement("div");
-			// translations  + datanotification
-			// wrapperDataNotification.innerHTML =  this.translate("UPDATE") + ": " + this.dataNotification;
-      for (var i in this.dataNotification) {
-        buildingData = this.dataNotification[i];
-        var building = document.createElement("div");
-        var buildingHeading = document.createElement("header");
-        buildingHeading
-        building.append(buildingHeading);
-        var urgentActions = document.createElement("div")
-        var urgentActionsList = document.createElement("ul")
-        urgentActions.append(urgentActionsList)
-        console.log("buildingData", buildingData)
-        for(var key in buildingData.urgent_actions) {
-
-          var li = document.createElement("li");
-          console.log("PM - ", key)
-          li.innerHTML = key
-          urgentActionsList.append(li)
-        }
-        building.append(urgentActions);
-        wrapperDataNotification.append(building);
-      }
-      wrapper.append(wrapperDataNotification);
-		}
-    console.log("HTML", wrapper.innerHTML)
-		return wrapper;
-	},
-
 	getScripts: function() {
 		return [
       "https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.10/handlebars.min.js",
