@@ -99,8 +99,11 @@ Module.register("MMM-Property-Managed", {
     if (actionsData.alarms) {
       for(var i in actionsData.alarms) {
         var alarm = actionsData.alarms[i];
-        actions.push({"name": alarm.location + "Alarm", "message": "Needs Replacing"});
+        actions.push({"name": alarm.location + " Alarm", "message": "Needs Replacing"});
       }
+    }
+    if (actionsData.invoices) {
+      actions.push({"name": "Invoices", "message": "Outstanding"});
     }
 
     if (actionsData.rent_payments) {
@@ -142,6 +145,8 @@ Module.register("MMM-Property-Managed", {
 
     for(var i in this.dataNotification) {
       var buildingData = this.dataNotification[i];
+      // delete buildingData.urgent_actions.invoies
+      // delete buildingData.upcoming_actions.invoies
       var data = {};
       data.name = buildingData.name;
       if (!this.emptyActions(buildingData.urgent_actions))

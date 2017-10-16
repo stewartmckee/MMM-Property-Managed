@@ -1,7 +1,7 @@
 (function() {
   var template = Handlebars.template, templates = Handlebars.templates = Handlebars.templates || {};
 templates['propertyManagedMain'] = template({"1":function(container,depth0,helpers,partials,data) {
-    return "    Great! Nothing to do!\n";
+    return "    <p class=\"nothing-to-do\">Great! Nothing to do!</p>\n";
 },"3":function(container,depth0,helpers,partials,data) {
     var stack1;
 

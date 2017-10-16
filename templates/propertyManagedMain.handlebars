@@ -1,14 +1,14 @@
 <div id="mmm-property-managed">
   <label>Property Managed</label>
   {{#if noBuildingsWithActions}}
-    Great! Nothing to do!
+    <p class="nothing-to-do bright">Great! Nothing to do!</p>
   {{else}}
     {{#each buildings}}
       {{#if hasActions}}
         <div class="building">
           <header class="module_header bright">{{name}}</header>
           {{#if urgentActions}}
-            <h4>Urgent Actions</h4>
+            <h4 class="red">Urgent Actions</h4>
             <table class="small">
               {{#each urgentActions}}
                 <tr class="normal"><td class="action-name bright">{{name}}</td><td class="action-message">{{message}}</td></li>

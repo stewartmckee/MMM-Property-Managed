@@ -26,3 +26,10 @@
 #mmm-property-managed td.action-name {
   padding-right: 10px;
 }
+#mmm-property-managed .nothing-to-do {
+  font-size: 20px;
+}
+
+#mmm-property-managed .red {
+  color: red;
+}
