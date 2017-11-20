@@ -11,7 +11,8 @@
 Module.register("MMM-Property-Managed", {
 	defaults: {
 		updateInterval: 60000,
-		retryDelay: 5000
+		retryDelay: 5000,
+    useColor: true
 	},
 
 	// requiresVersion: "2.1.0", // Required version of MagicMirror
@@ -20,7 +21,6 @@ Module.register("MMM-Property-Managed", {
 		var self = this;
 		var dataRequest = null;
 		var dataNotification = null;
-
 		//Flag for check if module is loaded
 		this.loaded = false;
 		// Schedule update timer.
@@ -47,7 +47,6 @@ Module.register("MMM-Property-Managed", {
 		dataRequest.onreadystatechange = function() {
 			if (this.readyState === 4) {
 				if (this.status === 200) {
-          console.log("received response", this.response)
 					self.processData(JSON.parse(this.response));
 				} else if (this.status === 401) {
 					self.updateDom(self.config.animationSpeed);
@@ -89,16 +88,17 @@ Module.register("MMM-Property-Managed", {
     if (actionsData.certificates) {
       for(var i in actionsData.certificates) {
         var certificate = actionsData.certificates[i];
-        actions.push({"name": this.titleize(certificate.certificate_type), "message": "Expired"})
+        actions.push({"name": this.titleize(certificate.certificate_type), "message": "Expired"});
       }
     }
 
     if (actionsData.landlord_inspections_due) {
       actions.push({"name": "Landlord Inspection", "message": "Inspection Due"});
     }
+
     if (actionsData.alarms) {
-      for(var i in actionsData.alarms) {
-        var alarm = actionsData.alarms[i];
+      for(var j in actionsData.alarms) {
+        var alarm = actionsData.alarms[j];
         actions.push({"name": alarm.location + " Alarm", "message": "Needs Replacing"});
       }
     }
@@ -141,12 +141,13 @@ Module.register("MMM-Property-Managed", {
 
     var buildings = [];
 
+    var loading = (this.dataNotification === undefined)
     var noBuildingsWithActions = true;
 
     for(var i in this.dataNotification) {
       var buildingData = this.dataNotification[i];
-      delete buildingData.urgent_actions.invoices
-      delete buildingData.upcoming_actions.invoices
+      delete buildingData.urgent_actions.invoices;
+      delete buildingData.upcoming_actions.invoices;
       var data = {};
       data.name = buildingData.name;
       if (!this.emptyActions(buildingData.urgent_actions))
@@ -167,11 +168,17 @@ Module.register("MMM-Property-Managed", {
 
     var context = {
       buildings: buildings,
-      noBuildingsWithActions: noBuildingsWithActions
+      noBuildingsWithActions: noBuildingsWithActions,
+      loading: loading
     };
 
+    if (this.config.useColor) {
+      context.urgentClass = "red";
+    } else {
+      context.urgentClass = "bright";
+    }
+
     var template = Handlebars.templates.propertyManagedMain;
-    console.log("data for render", context)
     var parser = new DOMParser();
     return parser.parseFromString(template(context), "text/html").getElementById("mmm-property-managed");
   },
@@ -202,7 +209,6 @@ Module.register("MMM-Property-Managed", {
 		this.dataRequest = data;
 		if (this.loaded === false) { self.updateDom(self.config.animationSpeed) ; }
 		this.loaded = true;
-    console.log("processData", data)
 		// the data if load
 		// send notification to helper
 		this.sendSocketNotification("mmm-property-managed-update_event", data);
@@ -210,10 +216,8 @@ Module.register("MMM-Property-Managed", {
 
 	// socketNotificationReceived from helper
 	socketNotificationReceived: function (notification, payload) {
-    console.log("socketNotificationReceived", "notification")
 		if(notification === "mmm-property-managed-update_event") {
 			// set dataNotification
-      console.log("received payload", payload)
 			this.dataNotification = payload;
 			this.updateDom();
 		}

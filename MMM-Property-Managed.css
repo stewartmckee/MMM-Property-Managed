@@ -33,3 +33,7 @@
 #mmm-property-managed .red {
   color: red;
 }
+
+#mmm-property-managed .action-group {
+  padding: 10px 0
+}

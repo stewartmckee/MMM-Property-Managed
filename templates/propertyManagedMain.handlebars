@@ -1,30 +1,38 @@
 <div id="mmm-property-managed">
-  <label>Property Managed</label>
-  {{#if noBuildingsWithActions}}
-    <p class="nothing-to-do bright">Great! Nothing to do!</p>
+  <header class="module-header">Property Managed</header>
+  {{#if loading}}
+    <p class="bright">Loading...</p>
   {{else}}
-    {{#each buildings}}
-      {{#if hasActions}}
-        <div class="building">
-          <header class="module_header bright">{{name}}</header>
-          {{#if urgentActions}}
-            <h4 class="red">Urgent Actions</h4>
-            <table class="small">
-              {{#each urgentActions}}
-                <tr class="normal"><td class="action-name bright">{{name}}</td><td class="action-message">{{message}}</td></li>
-              {{/each}}
-            </table>
-          {{/if}}
-          {{#if upcomingActions}}
-            <h4>Upcoming Actions</h4>
-            <table class="small">
-              {{#each upcomingActions}}
-                <tr class="normal"><td class="action-name bright">{{name}}</td><td class="action-message">{{message}}</td></li>
-              {{/each}}
-            </table>
-          {{/if}}
-        </div>
-      {{/if}}
-    {{/each}}
+    {{#if noBuildingsWithActions}}
+      <p class="nothing-to-do bright">Great! Nothing to do!</p>
+    {{else}}
+      {{#each buildings}}
+        {{#if hasActions}}
+          <div class="building">
+            <header class="module_header bright">{{name}}</header>
+            {{#if urgentActions}}
+              <div class="action-group">
+                <h4 class="{{../urgentClass}}">Urgent Actions</h4>
+                <table class="small">
+                  {{#each urgentActions}}
+                    <tr class="normal"><td class="action-name bright">{{name}}</td><td class="action-message">{{message}}</td></li>
+                  {{/each}}
+                </table>
+              </div>
+            {{/if}}
+            {{#if upcomingActions}}
+              <div class="action-group">
+                <h4 class="bright">Upcoming Actions</h4>
+                <table class="small">
+                  {{#each upcomingActions}}
+                    <tr class="normal"><td class="action-name bright">{{name}}</td><td class="action-message">{{message}}</td></li>
+                  {{/each}}
+                </table>
+              </div>
+            {{/if}}
+          </div>
+        {{/if}}
+      {{/each}}
+    {{/if}}
   {{/if}}
 </div>
