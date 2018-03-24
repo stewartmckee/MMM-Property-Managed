@@ -109,6 +109,9 @@ Module.register("MMM-Property-Managed", {
     if (actionsData.rent_payments) {
       actions.push({"name": "Rent Payment", "message": "Overdue"});
     }
+    if (actionsData.landlord_registration) {
+      actions.push({"name": "Landlord Registration", "message": "Registration Due"});
+    }
     return actions;
   },
 
@@ -135,7 +138,9 @@ Module.register("MMM-Property-Managed", {
   },
 
   titleize: function(str) {
-    return str.substr(0, 1).toUpperCase() + str.substr(1, str.length);
+    return str.replace("_"," ").split(" ").map(function(word) {    
+      return word.substr(0, 1).toUpperCase() + word.substr(1, word.length);
+    }).join(" ")
   },
   getDom: function() {
 
