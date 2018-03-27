@@ -88,7 +88,7 @@ Module.register("MMM-Property-Managed", {
     if (actionsData.certificates) {
       for(var i in actionsData.certificates) {
         var certificate = actionsData.certificates[i];
-        actions.push({"name": this.titleize(certificate.certificate_type), "message": "Expired"});
+        actions.push({"name": this.titleize(certificate.certificate_type), "message": "None Available"});
       }
     }
 
@@ -110,7 +110,7 @@ Module.register("MMM-Property-Managed", {
       actions.push({"name": "Rent Payment", "message": "Overdue"});
     }
     if (actionsData.landlord_registration) {
-      actions.push({"name": "Landlord Registration", "message": "Registration Due"});
+      actions.push({"name": "Landlord Registration", "message": "None Available"});
     }
     return actions;
   },
