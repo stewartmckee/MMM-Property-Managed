@@ -24,5 +24,7 @@ var config = {
 
 | Option           | Description
 |----------------- |-----------
-| `option1`        | *Required* DESCRIPTION HERE
-| `option2`        | *Optional* DESCRIPTION HERE TOO <br><br>**Type:** `int`(milliseconds) <br>Default 60000 milliseconds (1 minute)
+| `token`        | *Required* Authentication token obtained from www.property-managed.com
+| `useColor`        | *Optional* Specifies whether to use color in display. true (default) or false
+| `updateInterval`        | *Optional* Interval to wait between updates (default 60000)
+| `retryDelay`        | *Optional* Interval to wait between retries (default 5000)
